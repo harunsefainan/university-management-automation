@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="OkulOtomasyonuModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Bolum">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Bolum_Ad" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Fakulte_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Fakulte">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fakulte_ad" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Universite_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ogrenci">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ogr_Ad" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Universite_id" Type="int" Nullable="false" />
+    <Property Name="Fakulte_id" Type="int" Nullable="false" />
+    <Property Name="Bolum_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblKullanici">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Kadi" Type="nvarchar" MaxLength="50" />
+    <Property Name="Adi" Type="nvarchar" MaxLength="50" />
+    <Property Name="Soyadi" Type="nvarchar" MaxLength="50" />
+    <Property Name="Eposta" Type="nvarchar" MaxLength="50" />
+    <Property Name="Sifre" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Universite">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Universite_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Bolum_Fakulte">
+    <End Role="Fakulte" Type="Self.Fakulte" Multiplicity="1" />
+    <End Role="Bolum" Type="Self.Bolum" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fakulte">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Bolum">
+        <PropertyRef Name="Fakulte_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Fakulte_Universite">
+    <End Role="Universite" Type="Self.Universite" Multiplicity="1" />
+    <End Role="Fakulte" Type="Self.Fakulte" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Universite">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Fakulte">
+        <PropertyRef Name="Universite_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ogrenci_Bolum">
+    <End Role="Bolum" Type="Self.Bolum" Multiplicity="1" />
+    <End Role="Ogrenci" Type="Self.Ogrenci" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Bolum">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Ogrenci">
+        <PropertyRef Name="Bolum_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ogrenci_Fakulte">
+    <End Role="Fakulte" Type="Self.Fakulte" Multiplicity="1" />
+    <End Role="Ogrenci" Type="Self.Ogrenci" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Fakulte">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Ogrenci">
+        <PropertyRef Name="Fakulte_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ogrenci_Universite">
+    <End Role="Universite" Type="Self.Universite" Multiplicity="1" />
+    <End Role="Ogrenci" Type="Self.Ogrenci" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Universite">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Ogrenci">
+        <PropertyRef Name="Universite_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="OkulOtomasyonuModelStoreContainer">
+    <EntitySet Name="Bolum" EntityType="Self.Bolum" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Fakulte" EntityType="Self.Fakulte" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ogrenci" EntityType="Self.Ogrenci" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblKullanici" EntityType="Self.tblKullanici" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Universite" EntityType="Self.Universite" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Bolum_Fakulte" Association="Self.FK_Bolum_Fakulte">
+      <End Role="Fakulte" EntitySet="Fakulte" />
+      <End Role="Bolum" EntitySet="Bolum" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Fakulte_Universite" Association="Self.FK_Fakulte_Universite">
+      <End Role="Universite" EntitySet="Universite" />
+      <End Role="Fakulte" EntitySet="Fakulte" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ogrenci_Bolum" Association="Self.FK_Ogrenci_Bolum">
+      <End Role="Bolum" EntitySet="Bolum" />
+      <End Role="Ogrenci" EntitySet="Ogrenci" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ogrenci_Fakulte" Association="Self.FK_Ogrenci_Fakulte">
+      <End Role="Fakulte" EntitySet="Fakulte" />
+      <End Role="Ogrenci" EntitySet="Ogrenci" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ogrenci_Universite" Association="Self.FK_Ogrenci_Universite">
+      <End Role="Universite" EntitySet="Universite" />
+      <End Role="Ogrenci" EntitySet="Ogrenci" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c31bf3013bd1465bb817f23dbd574416" Name="Diagram1">
+        <EntityTypeShape EntityType="OkulOtomasyonuModel.Bolum" Width="1.5" PointX="1.875" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OkulOtomasyonuModel.Fakulte" Width="1.5" PointX="8" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OkulOtomasyonuModel.Ogrenci" Width="1.5" PointX="2.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OkulOtomasyonuModel.tblKullanici" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OkulOtomasyonuModel.Universite" Width="1.5" PointX="5" PointY="2.125" IsExpanded="true" />
+        <AssociationConnector Association="OkulOtomasyonuModel.FK_Bolum_Fakulte" ManuallyRouted="false" />
+        <AssociationConnector Association="OkulOtomasyonuModel.FK_Ogrenci_Bolum" ManuallyRouted="false" />
+        <AssociationConnector Association="OkulOtomasyonuModel.FK_Fakulte_Universite" ManuallyRouted="false" />
+        <AssociationConnector Association="OkulOtomasyonuModel.FK_Ogrenci_Fakulte" ManuallyRouted="false" />
+        <AssociationConnector Association="OkulOtomasyonuModel.FK_Ogrenci_Universite" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

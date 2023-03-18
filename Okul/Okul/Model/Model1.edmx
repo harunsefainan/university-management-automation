@@ -1,0 +1,363 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="OkulOtomasyonuModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Bolum">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Bolum_Ad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fakulte_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fakulte">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fakulte_ad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Universite_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ogrenci">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ogr_Ad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Universite_id" Type="int" Nullable="false" />
+          <Property Name="Fakulte_id" Type="int" Nullable="false" />
+          <Property Name="Bolum_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblKullanici">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Kadi" Type="nvarchar" MaxLength="50" />
+          <Property Name="Adi" Type="nvarchar" MaxLength="50" />
+          <Property Name="Soyadi" Type="nvarchar" MaxLength="50" />
+          <Property Name="Eposta" Type="nvarchar" MaxLength="50" />
+          <Property Name="Sifre" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Universite">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Universite_id" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Bolum_Fakulte">
+          <End Role="Fakulte" Type="Self.Fakulte" Multiplicity="1" />
+          <End Role="Bolum" Type="Self.Bolum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fakulte">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Bolum">
+              <PropertyRef Name="Fakulte_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fakulte_Universite">
+          <End Role="Universite" Type="Self.Universite" Multiplicity="1" />
+          <End Role="Fakulte" Type="Self.Fakulte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Universite">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Fakulte">
+              <PropertyRef Name="Universite_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ogrenci_Bolum">
+          <End Role="Bolum" Type="Self.Bolum" Multiplicity="1" />
+          <End Role="Ogrenci" Type="Self.Ogrenci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bolum">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ogrenci">
+              <PropertyRef Name="Bolum_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ogrenci_Fakulte">
+          <End Role="Fakulte" Type="Self.Fakulte" Multiplicity="1" />
+          <End Role="Ogrenci" Type="Self.Ogrenci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fakulte">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ogrenci">
+              <PropertyRef Name="Fakulte_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ogrenci_Universite">
+          <End Role="Universite" Type="Self.Universite" Multiplicity="1" />
+          <End Role="Ogrenci" Type="Self.Ogrenci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Universite">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ogrenci">
+              <PropertyRef Name="Universite_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OkulOtomasyonuModelStoreContainer">
+          <EntitySet Name="Bolum" EntityType="Self.Bolum" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fakulte" EntityType="Self.Fakulte" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ogrenci" EntityType="Self.Ogrenci" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblKullanici" EntityType="Self.tblKullanici" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Universite" EntityType="Self.Universite" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Bolum_Fakulte" Association="Self.FK_Bolum_Fakulte">
+            <End Role="Fakulte" EntitySet="Fakulte" />
+            <End Role="Bolum" EntitySet="Bolum" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fakulte_Universite" Association="Self.FK_Fakulte_Universite">
+            <End Role="Universite" EntitySet="Universite" />
+            <End Role="Fakulte" EntitySet="Fakulte" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ogrenci_Bolum" Association="Self.FK_Ogrenci_Bolum">
+            <End Role="Bolum" EntitySet="Bolum" />
+            <End Role="Ogrenci" EntitySet="Ogrenci" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ogrenci_Fakulte" Association="Self.FK_Ogrenci_Fakulte">
+            <End Role="Fakulte" EntitySet="Fakulte" />
+            <End Role="Ogrenci" EntitySet="Ogrenci" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ogrenci_Universite" Association="Self.FK_Ogrenci_Universite">
+            <End Role="Universite" EntitySet="Universite" />
+            <End Role="Ogrenci" EntitySet="Ogrenci" />
+          </AssociationSet>
+          </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OkulOtomasyonuModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Bolum">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bolum_Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fakulte_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Fakulte" Relationship="Self.FK_Bolum_Fakulte" FromRole="Bolum" ToRole="Fakulte" />
+          <NavigationProperty Name="Ogrenci" Relationship="Self.FK_Ogrenci_Bolum" FromRole="Bolum" ToRole="Ogrenci" />
+        </EntityType>
+        <EntityType Name="Fakulte">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fakulte_ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Universite_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Bolum" Relationship="Self.FK_Bolum_Fakulte" FromRole="Fakulte" ToRole="Bolum" />
+          <NavigationProperty Name="Universite" Relationship="Self.FK_Fakulte_Universite" FromRole="Fakulte" ToRole="Universite" />
+          <NavigationProperty Name="Ogrenci" Relationship="Self.FK_Ogrenci_Fakulte" FromRole="Fakulte" ToRole="Ogrenci" />
+        </EntityType>
+        <EntityType Name="Ogrenci">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ogr_Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Universite_id" Type="Int32" Nullable="false" />
+          <Property Name="Fakulte_id" Type="Int32" Nullable="false" />
+          <Property Name="Bolum_id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Bolum" Relationship="Self.FK_Ogrenci_Bolum" FromRole="Ogrenci" ToRole="Bolum" />
+          <NavigationProperty Name="Fakulte" Relationship="Self.FK_Ogrenci_Fakulte" FromRole="Ogrenci" ToRole="Fakulte" />
+          <NavigationProperty Name="Universite" Relationship="Self.FK_Ogrenci_Universite" FromRole="Ogrenci" ToRole="Universite" />
+        </EntityType>
+        <EntityType Name="tblKullanici">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Kadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Adi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Soyadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Eposta" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Universite">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Universite_id" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Fakulte" Relationship="Self.FK_Fakulte_Universite" FromRole="Universite" ToRole="Fakulte" />
+          <NavigationProperty Name="Ogrenci" Relationship="Self.FK_Ogrenci_Universite" FromRole="Universite" ToRole="Ogrenci" />
+        </EntityType>
+        <Association Name="FK_Bolum_Fakulte">
+          <End Role="Fakulte" Type="Self.Fakulte" Multiplicity="1" />
+          <End Role="Bolum" Type="Self.Bolum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fakulte">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Bolum">
+              <PropertyRef Name="Fakulte_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ogrenci_Bolum">
+          <End Role="Bolum" Type="Self.Bolum" Multiplicity="1" />
+          <End Role="Ogrenci" Type="Self.Ogrenci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bolum">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ogrenci">
+              <PropertyRef Name="Bolum_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Fakulte_Universite">
+          <End Role="Universite" Type="Self.Universite" Multiplicity="1" />
+          <End Role="Fakulte" Type="Self.Fakulte" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Universite">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Fakulte">
+              <PropertyRef Name="Universite_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ogrenci_Fakulte">
+          <End Role="Fakulte" Type="Self.Fakulte" Multiplicity="1" />
+          <End Role="Ogrenci" Type="Self.Ogrenci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fakulte">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ogrenci">
+              <PropertyRef Name="Fakulte_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ogrenci_Universite">
+          <End Role="Universite" Type="Self.Universite" Multiplicity="1" />
+          <End Role="Ogrenci" Type="Self.Ogrenci" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Universite">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Ogrenci">
+              <PropertyRef Name="Universite_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OkulOtomasyonuEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bolum" EntityType="Self.Bolum" />
+          <EntitySet Name="Fakulte" EntityType="Self.Fakulte" />
+          <EntitySet Name="Ogrenci" EntityType="Self.Ogrenci" />
+          <EntitySet Name="tblKullanici" EntityType="Self.tblKullanici" />
+          <EntitySet Name="Universite" EntityType="Self.Universite" />
+          <AssociationSet Name="FK_Bolum_Fakulte" Association="Self.FK_Bolum_Fakulte">
+            <End Role="Fakulte" EntitySet="Fakulte" />
+            <End Role="Bolum" EntitySet="Bolum" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ogrenci_Bolum" Association="Self.FK_Ogrenci_Bolum">
+            <End Role="Bolum" EntitySet="Bolum" />
+            <End Role="Ogrenci" EntitySet="Ogrenci" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Fakulte_Universite" Association="Self.FK_Fakulte_Universite">
+            <End Role="Universite" EntitySet="Universite" />
+            <End Role="Fakulte" EntitySet="Fakulte" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ogrenci_Fakulte" Association="Self.FK_Ogrenci_Fakulte">
+            <End Role="Fakulte" EntitySet="Fakulte" />
+            <End Role="Ogrenci" EntitySet="Ogrenci" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ogrenci_Universite" Association="Self.FK_Ogrenci_Universite">
+            <End Role="Universite" EntitySet="Universite" />
+            <End Role="Ogrenci" EntitySet="Ogrenci" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OkulOtomasyonuModelStoreContainer" CdmEntityContainer="OkulOtomasyonuEntities1">
+          <EntitySetMapping Name="Bolum">
+            <EntityTypeMapping TypeName="OkulOtomasyonuModel.Bolum">
+              <MappingFragment StoreEntitySet="Bolum">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Bolum_Ad" ColumnName="Bolum_Ad" />
+                <ScalarProperty Name="Fakulte_id" ColumnName="Fakulte_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fakulte">
+            <EntityTypeMapping TypeName="OkulOtomasyonuModel.Fakulte">
+              <MappingFragment StoreEntitySet="Fakulte">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Fakulte_ad" ColumnName="Fakulte_ad" />
+                <ScalarProperty Name="Universite_id" ColumnName="Universite_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ogrenci">
+            <EntityTypeMapping TypeName="OkulOtomasyonuModel.Ogrenci">
+              <MappingFragment StoreEntitySet="Ogrenci">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Ogr_Ad" ColumnName="Ogr_Ad" />
+                <ScalarProperty Name="Universite_id" ColumnName="Universite_id" />
+                <ScalarProperty Name="Fakulte_id" ColumnName="Fakulte_id" />
+                <ScalarProperty Name="Bolum_id" ColumnName="Bolum_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblKullanici">
+            <EntityTypeMapping TypeName="OkulOtomasyonuModel.tblKullanici">
+              <MappingFragment StoreEntitySet="tblKullanici">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Kadi" ColumnName="Kadi" />
+                <ScalarProperty Name="Adi" ColumnName="Adi" />
+                <ScalarProperty Name="Soyadi" ColumnName="Soyadi" />
+                <ScalarProperty Name="Eposta" ColumnName="Eposta" />
+                <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Universite">
+            <EntityTypeMapping TypeName="OkulOtomasyonuModel.Universite">
+              <MappingFragment StoreEntitySet="Universite">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Universite_id" ColumnName="Universite_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

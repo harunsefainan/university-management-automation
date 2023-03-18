@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OkulOtomasyonuModelStoreContainer" CdmEntityContainer="OkulOtomasyonuEntities1">
+    <EntitySetMapping Name="Bolum">
+      <EntityTypeMapping TypeName="OkulOtomasyonuModel.Bolum">
+        <MappingFragment StoreEntitySet="Bolum">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Bolum_Ad" ColumnName="Bolum_Ad" />
+          <ScalarProperty Name="Fakulte_id" ColumnName="Fakulte_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Fakulte">
+      <EntityTypeMapping TypeName="OkulOtomasyonuModel.Fakulte">
+        <MappingFragment StoreEntitySet="Fakulte">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Fakulte_ad" ColumnName="Fakulte_ad" />
+          <ScalarProperty Name="Universite_id" ColumnName="Universite_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ogrenci">
+      <EntityTypeMapping TypeName="OkulOtomasyonuModel.Ogrenci">
+        <MappingFragment StoreEntitySet="Ogrenci">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Ogr_Ad" ColumnName="Ogr_Ad" />
+          <ScalarProperty Name="Universite_id" ColumnName="Universite_id" />
+          <ScalarProperty Name="Fakulte_id" ColumnName="Fakulte_id" />
+          <ScalarProperty Name="Bolum_id" ColumnName="Bolum_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblKullanici">
+      <EntityTypeMapping TypeName="OkulOtomasyonuModel.tblKullanici">
+        <MappingFragment StoreEntitySet="tblKullanici">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Kadi" ColumnName="Kadi" />
+          <ScalarProperty Name="Adi" ColumnName="Adi" />
+          <ScalarProperty Name="Soyadi" ColumnName="Soyadi" />
+          <ScalarProperty Name="Eposta" ColumnName="Eposta" />
+          <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Universite">
+      <EntityTypeMapping TypeName="OkulOtomasyonuModel.Universite">
+        <MappingFragment StoreEntitySet="Universite">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Universite_id" ColumnName="Universite_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
