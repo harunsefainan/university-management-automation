@@ -9,3 +9,5 @@
 *.xml linguist-detectable=false
 
 *.css linguist-detectable=false
+
+*.asp.net linguist-detectable=false
